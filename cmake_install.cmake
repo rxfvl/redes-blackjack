@@ -1,4 +1,4 @@
-# Install script for directory: /home/dani/Escritorio/redes-blackjack
+# Install script for directory: /home/rafa/Desktop/redes-blackjack
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/dani/Escritorio/redes-blackjack/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/rafa/Desktop/redes-blackjack/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

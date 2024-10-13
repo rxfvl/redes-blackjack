@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/dani/Escritorio/redes-blackjack
+CMAKE_SOURCE_DIR = /home/rafa/Desktop/redes-blackjack
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/dani/Escritorio/redes-blackjack
+CMAKE_BINARY_DIR = /home/rafa/Desktop/redes-blackjack
 
 # Include any dependencies generated for this target.
 include CMakeFiles/server.dir/depend.make
@@ -72,30 +72,30 @@ include CMakeFiles/server.dir/flags.make
 CMakeFiles/server.dir/aux.c.o: CMakeFiles/server.dir/flags.make
 CMakeFiles/server.dir/aux.c.o: aux.c
 CMakeFiles/server.dir/aux.c.o: CMakeFiles/server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dani/Escritorio/redes-blackjack/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/server.dir/aux.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/server.dir/aux.c.o -MF CMakeFiles/server.dir/aux.c.o.d -o CMakeFiles/server.dir/aux.c.o -c /home/dani/Escritorio/redes-blackjack/aux.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rafa/Desktop/redes-blackjack/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/server.dir/aux.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/server.dir/aux.c.o -MF CMakeFiles/server.dir/aux.c.o.d -o CMakeFiles/server.dir/aux.c.o -c /home/rafa/Desktop/redes-blackjack/aux.c
 
 CMakeFiles/server.dir/aux.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/aux.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/dani/Escritorio/redes-blackjack/aux.c > CMakeFiles/server.dir/aux.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/rafa/Desktop/redes-blackjack/aux.c > CMakeFiles/server.dir/aux.c.i
 
 CMakeFiles/server.dir/aux.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/aux.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/dani/Escritorio/redes-blackjack/aux.c -o CMakeFiles/server.dir/aux.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/rafa/Desktop/redes-blackjack/aux.c -o CMakeFiles/server.dir/aux.c.s
 
 CMakeFiles/server.dir/servidorChat.c.o: CMakeFiles/server.dir/flags.make
 CMakeFiles/server.dir/servidorChat.c.o: servidorChat.c
 CMakeFiles/server.dir/servidorChat.c.o: CMakeFiles/server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dani/Escritorio/redes-blackjack/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/server.dir/servidorChat.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/server.dir/servidorChat.c.o -MF CMakeFiles/server.dir/servidorChat.c.o.d -o CMakeFiles/server.dir/servidorChat.c.o -c /home/dani/Escritorio/redes-blackjack/servidorChat.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rafa/Desktop/redes-blackjack/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/server.dir/servidorChat.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/server.dir/servidorChat.c.o -MF CMakeFiles/server.dir/servidorChat.c.o.d -o CMakeFiles/server.dir/servidorChat.c.o -c /home/rafa/Desktop/redes-blackjack/servidorChat.c
 
 CMakeFiles/server.dir/servidorChat.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/servidorChat.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/dani/Escritorio/redes-blackjack/servidorChat.c > CMakeFiles/server.dir/servidorChat.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/rafa/Desktop/redes-blackjack/servidorChat.c > CMakeFiles/server.dir/servidorChat.c.i
 
 CMakeFiles/server.dir/servidorChat.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/servidorChat.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/dani/Escritorio/redes-blackjack/servidorChat.c -o CMakeFiles/server.dir/servidorChat.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/rafa/Desktop/redes-blackjack/servidorChat.c -o CMakeFiles/server.dir/servidorChat.c.s
 
 # Object files for target server
 server_OBJECTS = \
@@ -109,7 +109,7 @@ server: CMakeFiles/server.dir/aux.c.o
 server: CMakeFiles/server.dir/servidorChat.c.o
 server: CMakeFiles/server.dir/build.make
 server: CMakeFiles/server.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dani/Escritorio/redes-blackjack/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/rafa/Desktop/redes-blackjack/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable server"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/server.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -121,6 +121,6 @@ CMakeFiles/server.dir/clean:
 .PHONY : CMakeFiles/server.dir/clean
 
 CMakeFiles/server.dir/depend:
-	cd /home/dani/Escritorio/redes-blackjack && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/dani/Escritorio/redes-blackjack /home/dani/Escritorio/redes-blackjack /home/dani/Escritorio/redes-blackjack /home/dani/Escritorio/redes-blackjack /home/dani/Escritorio/redes-blackjack/CMakeFiles/server.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/rafa/Desktop/redes-blackjack && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/rafa/Desktop/redes-blackjack /home/rafa/Desktop/redes-blackjack /home/rafa/Desktop/redes-blackjack /home/rafa/Desktop/redes-blackjack /home/rafa/Desktop/redes-blackjack/CMakeFiles/server.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/server.dir/depend
 

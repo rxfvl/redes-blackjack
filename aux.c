@@ -1,54 +1,67 @@
 #include "aux.h"
+#include <stdlib.h>
+
 
 void registro(char buffer[250]){
     char usuario[50];
     char password[50];
     char *token;
+    int correcto = 0;
 
-    printf("fichero creado\n");
-
-    // Separar el buffer por espacios
+    // format: REGISTRO -u <usuario> -p <password>
     token = strtok(buffer, " ");
-    
-    // Recorrer el comando
-    while (token != NULL) {
-        if(strcmp(token, "-u") == 0) {
-            // El siguiente token será el nombre de usuario
+    token = strtok(NULL, " ");
+    if (token != NULL)
+    {
+        if (strcmp(token, "-u") == 0)
+        {
             token = strtok(NULL, " ");
-            if(token != NULL) {
+            if (token != NULL)
+            {
+                // if (buscarUsuario(token) != NULL)
+                // {
+                //     printf("-Err. Usuario ya registrado\n");
+                //     return;
+                // }
                 strcpy(usuario, token);
             }
-            if(buscarUsuario(usuario) != NULL)
-            {
-                printf("-Err. Nombre de usuario en uso\n");
-                return;
-            }
-        }
-        else if(strcmp(token, "-p") == 0) {
-            // El siguiente token será la contraseña
             token = strtok(NULL, " ");
-            if (token != NULL) {
-                strcpy(password, token);
+            if (token != NULL)
+            {
+                if (strcmp(token, "-p") == 0)
+                {
+                    token = strtok(NULL, " ");
+                    if (token != NULL)
+                    {
+                        strcpy(password, token);
+                        correcto = 1;
+                    }
+                }
             }
         }
-        token = strtok(NULL, " ");
     }
+ 
+    if (correcto == 1)
+    {
+        FILE *fichero = fopen("usuarios.txt", "a");
+        if(fichero == NULL){
+            printf("Error al abrir el fichero\n");
+            return;
+        }
+        fprintf(fichero, "%s %s", usuario, password);
 
-    FILE *fichero = fopen("usuarios.txt", "a");
-    if(fichero == NULL){
-        printf("Error al abrir el fichero\n");
-        return;
+        fclose(fichero);
     }
-
-    fprintf(fichero, " %s %s\n", usuario, password);
-
-    fclose(fichero);
+    else {
+        printf("-Err. Comando incorrecto\n");
+    }
 }
 
 char* buscarUsuario(char* usuario)
 {
-    char linea [100];
+    // char linea [100];
     char usuarioF[50];
+    char* password;
 
     FILE* fichero = fopen("usuarios.txt", "r");
     if (fichero == NULL)
@@ -57,14 +70,23 @@ char* buscarUsuario(char* usuario)
     }
     else
     {
-        while(fgets(linea, sizeof(linea), fichero))
+        // while(fgets(linea, sizeof(linea), fichero))
+        // {
+        //     linea[strcspn(linea, "\n")] = 0;
+        //     char *aux = strtok(linea, " ");
+        //     if(strcmp(usuario, aux) == 0){
+        //         aux = strtok(NULL, " ");
+        //         fclose(fichero);
+        //         return aux;
+        //     }
+        // }
+
+        while(fscanf(fichero, "%s", usuarioF) != EOF)
         {
-            linea[strcspn(linea, "\n")] = 0;
-            char *aux = strtok(linea, " ");
-            if(strcmp(usuario, aux) == 0){
-                aux = strtok(NULL, " ");
+            fscanf(fichero, "%s", password);
+            if(strcmp(usuario, usuarioF) == 0){                
                 fclose(fichero);
-                return aux;
+                return password;
             }
         }
         fclose(fichero);
