@@ -34,7 +34,7 @@ int main(){
    	int salida;
    	int arrayClientes[MAX_CLIENTS];
     int numClientes = 0;
-    char* user;
+    char* user = malloc(50 * sizeof(char));
     
 
    	//contadores
@@ -181,7 +181,7 @@ int main(){
                                     if(usuario != NULL)
                                     {
                                         char* contraseña = buscarUsuario(usuario);
-                                        // strcpy (user, usuario);
+                                        strcpy(user, usuario);
                                         printf("user: %s\n", user);
                                         
                                         if(contraseña != NULL)
@@ -208,8 +208,28 @@ int main(){
                                     }
                                     else
                                     {
-                                        inicioSesion = 2;
                                         printf("user2: %s\n", user);
+                                        char* password = strtok(buffer, " ");
+                                        password = strtok(NULL, " ");
+                                        printf("aaa\n");
+                                        char *pass = buscarUsuario(user);
+                                        printf("passwd antigua: %s", pass);
+                                        printf("passwd nueva: %s", password);
+                                        printf("aaa2\n");
+                                        
+
+
+                                        if(buscarUsuario(user) == password)
+                                        {
+                                            inicioSesion = 2;
+                                            strcpy(buffer, "+OK. Usuario validado\n");
+                                            send(new_sd, buffer, sizeof(buffer), 0);
+                                        }
+                                        else
+                                        {
+                                            strcpy(buffer, "-Err. Error en la validación\n");
+                                            send(new_sd, buffer, sizeof(buffer), 0);
+                                        }
 
                                     }
                                 }
