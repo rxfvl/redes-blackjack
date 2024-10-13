@@ -4,6 +4,6 @@
 #include <stdio.h>
 #include <string.h>
 
-void registro(char buffer[250]);
+void registro(char buffer[250], int new_sd);
 char* buscarUsuario(char usuario[250]);
 #endif

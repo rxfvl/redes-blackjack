@@ -2,12 +2,12 @@
 #include <stdlib.h>
 
 
-void registro(char buffer[250]){
+void registro(char buffer[250], int new_sd){
     char usuario[50];
     char password[50];
     char *token;
     int correcto = 0;
-
+    char msg[250];
     // format: REGISTRO -u <usuario> -p <password>
     token = strtok(buffer, " ");
     token = strtok(NULL, " ");
@@ -20,7 +20,8 @@ void registro(char buffer[250]){
             {
                 if (buscarUsuario(token) != NULL)
                 {
-                    printf("-Err. Usuario ya registrado\n");
+                    strcpy(msg, "-Err. Usuario ya registrado\n");
+                    send(new_sd, msg, sizeof(msg), 0);
                     return;
                 }
                 strcpy(usuario, token);
@@ -52,16 +53,20 @@ void registro(char buffer[250]){
 
         fclose(fichero);
     }
-    else {
-        printf("-Err. Comando incorrecto\n");
+    else 
+    {
+        strcpy(msg, "-Err. Comando incorrecto\n");
+        send(new_sd, msg, sizeof(msg), 0);
     }
 }
 
 char* buscarUsuario(char* usuario)
 {
-    // char linea [100];
     char usuarioF[50];
-    char* password;
+    char* password;  
+
+    size_t len = strlen(usuario);
+    if (usuario[len - 1] == '\n') {usuario[len - 1] = '\0';}
 
     FILE* fichero = fopen("usuarios.txt", "r");
     if (fichero == NULL)
@@ -77,11 +82,13 @@ char* buscarUsuario(char* usuario)
             if (strcmp(usuario, usuarioF) == 0)
             {
                 fclose(fichero);
+                
                 return password;
             }
             free(password);
         }
         fclose(fichero);
+
         return NULL;
     }
 }

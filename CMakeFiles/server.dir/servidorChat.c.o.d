@@ -1,5 +1,5 @@
 CMakeFiles/server.dir/servidorChat.c.o: \
- /home/rafa/Desktop/redes-blackjack/servidorChat.c \
+ /home/dani/Escritorio/redes-blackjack/servidorChat.c \
  /usr/include/stdc-predef.h /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -100,4 +100,4 @@ CMakeFiles/server.dir/servidorChat.c.o: \
  /usr/include/x86_64-linux-gnu/bits/time.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
- /usr/include/arpa/inet.h /home/rafa/Desktop/redes-blackjack/aux.h
+ /usr/include/arpa/inet.h /home/dani/Escritorio/redes-blackjack/aux.h

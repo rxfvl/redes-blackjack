@@ -1,6 +1,6 @@
-CMakeFiles/server.dir/aux.c.o: /home/rafa/Desktop/redes-blackjack/aux.c \
- /usr/include/stdc-predef.h /home/rafa/Desktop/redes-blackjack/aux.h \
- /usr/include/stdio.h \
+CMakeFiles/server.dir/aux.c.o: \
+ /home/dani/Escritorio/redes-blackjack/aux.c /usr/include/stdc-predef.h \
+ /home/dani/Escritorio/redes-blackjack/aux.h /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \

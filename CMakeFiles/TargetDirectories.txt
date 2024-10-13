@@ -1,4 +1,4 @@
-/home/rafa/Desktop/redes-blackjack/CMakeFiles/server.dir
-/home/rafa/Desktop/redes-blackjack/CMakeFiles/cliente.dir
-/home/rafa/Desktop/redes-blackjack/CMakeFiles/edit_cache.dir
-/home/rafa/Desktop/redes-blackjack/CMakeFiles/rebuild_cache.dir
+/home/dani/Escritorio/redes-blackjack/CMakeFiles/server.dir
+/home/dani/Escritorio/redes-blackjack/CMakeFiles/cliente.dir
+/home/dani/Escritorio/redes-blackjack/CMakeFiles/edit_cache.dir
+/home/dani/Escritorio/redes-blackjack/CMakeFiles/rebuild_cache.dir

@@ -40,6 +40,9 @@ int main(){
 	int recibidos;
    	char identificador[MSG_SIZE];
     int on, ret;
+
+    //inicio de sesion
+    int inicioSesion = 0;
     
 	/* --------------------------------------------------
 		Se abre el socket 
@@ -165,61 +168,57 @@ int main(){
                                 if(strstr(buffer,"REGISTRO") != NULL)
                                 {
                                     printf("registro\n");
-                                    registro(buffer);
+                                    registro(buffer, new_sd);
                                 }
 
-                                if(strstr(buffer,"USUARIO\n") != NULL)
+                                if(strstr(buffer,"USUARIO") != NULL)
                                 {
                                     char *usuario = strtok(buffer, " ");
+                                    usuario = strtok(NULL, " ");
 
-                                    if(buscarUsuario(buffer) != NULL)
+                                    if(usuario != NULL)
                                     {
-                                        strcpy(buffer, "+OK. Usuario correcto\n");
-                                        send(new_sd, buffer, sizeof(buffer), 0);
-
-                                        while(strstr(buffer, "PASSWORD\n") == NULL)
-                                        {
-                                            strcpy(buffer, "-Err. Introduce la contraseña\n");
+                                        char *contraseña = buscarUsuario(usuario);
+                                        
+                                        if(contraseña != NULL)
+                                        {  
+                                            strcpy(buffer, "+OK. Usuario correcto\n");
                                             send(new_sd, buffer, sizeof(buffer), 0);
-                                        }
-                                        char *password = strtok(buffer, " ");
-
-                                        if(strcmp(buscarUsuario(usuario), password) == 0)
-                                        {
-                                            strcpy(buffer, "+Ok. Usuario validado\n");
-                                            send(new_sd, buffer, sizeof(buffer), 0);
+                                            inicioSesion = 1;
                                         }
                                         else
                                         {
-                                            strcpy(buffer, "-Err. Error en la validacion\n");
+                                            strcpy(buffer, "-Err. Usuario incorrecto\n");
                                             send(new_sd, buffer, sizeof(buffer), 0);
                                         }
                                     }
+                                }
+
+                                if(strstr(buffer,"PASSWORD") != NULL)
+                                {
+
+                                    if(inicioSesion == 0)
+                                    {
+                                        strcpy(buffer, "-Err. Introduce usuario antes\n");
+                                        send(new_sd, buffer, sizeof(buffer), 0); 
+                                    }
                                     else
                                     {
-                                        strcpy(buffer, "-Err. Usuario incorrecto\n");
-                                        send(new_sd, buffer, sizeof(buffer), 0);
+                                        inicioSesion = 2;
+                                        
                                     }
                                 }
 
-                                // else if(strcmp(buffer,"PASSWORD\n") == 0){
+                                // else if(strstr(buffer,"INICIAR-PARTIDA") != NULL){
                                     
                                 // }
 
-                                // else if(strcmp(buffer,"INICIAR-PARTIDA\n") == 0){
+                                // else if(strstr(buffer,"PEDIR-CARTA") != NULL){
                                     
                                 // }
 
-                                // else if(strcmp(buffer,"PEDIR-CARTA\n") == 0){
+                                // else if(strstr(buffer,"PLANTARME") != NULL){
                                     
-                                // }
-
-                                // else if(strcmp(buffer,"PLANTARME\n") == 0){
-                                    
-                                // }
-
-                                // else{
-
                                 // }
                                 
                                 if(strcmp(buffer, "SALIR\n") == 0)
