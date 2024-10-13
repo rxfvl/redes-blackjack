@@ -34,6 +34,8 @@ int main(){
    	int salida;
    	int arrayClientes[MAX_CLIENTS];
     int numClientes = 0;
+    char* user;
+    
 
    	//contadores
     int i, j, k;
@@ -173,12 +175,14 @@ int main(){
 
                                 if(strstr(buffer,"USUARIO") != NULL)
                                 {
-                                    char *usuario = strtok(buffer, " ");
+                                    char* usuario = strtok(buffer, " ");
                                     usuario = strtok(NULL, " ");
 
                                     if(usuario != NULL)
                                     {
-                                        char *contraseña = buscarUsuario(usuario);
+                                        char* contraseña = buscarUsuario(usuario);
+                                        // strcpy (user, usuario);
+                                        printf("user: %s\n", user);
                                         
                                         if(contraseña != NULL)
                                         {  
@@ -205,7 +209,8 @@ int main(){
                                     else
                                     {
                                         inicioSesion = 2;
-                                        
+                                        printf("user2: %s\n", user);
+
                                     }
                                 }
 

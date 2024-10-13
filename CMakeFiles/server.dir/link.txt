@@ -1,1 +1,0 @@
-/usr/bin/cc -rdynamic CMakeFiles/server.dir/aux.c.o CMakeFiles/server.dir/servidorChat.c.o -o server 
