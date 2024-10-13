@@ -2,16 +2,8 @@
 
 void registro(char buffer[250]){
     char usuario[50];
-    char usuarioF[50];
     char password[50];
-    char linea [100];
     char *token;
-    
-    FILE *fichero = fopen("usuarios.txt", "a");
-    if(fichero == NULL){
-        printf("Error al abrir el fichero\n");
-        return;
-    }
 
     printf("fichero creado\n");
 
@@ -26,14 +18,10 @@ void registro(char buffer[250]){
             if(token != NULL) {
                 strcpy(usuario, token);
             }
-            while(fgets(linea, sizeof(linea), fichero)){
-                linea[strcspn(linea, "\n")] = 0;
-                char *aux = strtok(linea, ",");
-                strcpy(usuarioF, aux);
-                if(strcmp(usuario, usuarioF) == 0){
-                    printf("-Err. Nombre de usuario en uso\n");
-                    return;
-                }
+            if(buscarUsuario(usuario) != NULL)
+            {
+                printf("-Err. Nombre de usuario en uso\n");
+                return;
             }
         }
         else if(strcmp(token, "-p") == 0) {
@@ -46,7 +34,40 @@ void registro(char buffer[250]){
         token = strtok(NULL, " ");
     }
 
-    fprintf(fichero, "%s,%s\n", usuario, password);
+    FILE *fichero = fopen("usuarios.txt", "a");
+    if(fichero == NULL){
+        printf("Error al abrir el fichero\n");
+        return;
+    }
+
+    fprintf(fichero, " %s %s\n", usuario, password);
 
     fclose(fichero);
+}
+
+char* buscarUsuario(char* usuario)
+{
+    char linea [100];
+    char usuarioF[50];
+
+    FILE* fichero = fopen("usuarios.txt", "r");
+    if (fichero == NULL)
+    {
+        printf("Fichero usuarios.txt no existe\n");
+    }
+    else
+    {
+        while(fgets(linea, sizeof(linea), fichero))
+        {
+            linea[strcspn(linea, "\n")] = 0;
+            char *aux = strtok(linea, " ");
+            if(strcmp(usuario, aux) == 0){
+                aux = strtok(NULL, " ");
+                fclose(fichero);
+                return aux;
+            }
+        }
+        fclose(fichero);
+        return NULL;
+    }
 }

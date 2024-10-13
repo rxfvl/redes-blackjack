@@ -159,41 +159,75 @@ int main(){
                             
                             recibidos = recv(i, buffer, sizeof(buffer), 0);
                             
-                            if(recibidos > 0){
+                            if(recibidos > 0)
+                            {
 
-                            // if(strcmp(buffer,"USUARIO\n") == 0){
-                    
-                            // }
+                                if(strstr(buffer,"REGISTRO") != NULL)
+                                {
+                                    printf("registro\n");
+                                    registro(buffer);
+                                }
 
-                            // else if(strcmp(buffer,"PASSWORD\n") == 0){
+                                if(strstr(buffer,"USUARIO\n") != NULL)
+                                {
+                                    char *usuario = strtok(buffer, " ");
+
+                                    if(buscarUsuario(buffer) != NULL)
+                                    {
+                                        strcpy(buffer, "+OK. Usuario correcto\n");
+                                        send(new_sd, buffer, sizeof(buffer), 0);
+
+                                        while(strstr(buffer, "PASSWORD\n") == NULL)
+                                        {
+                                            strcpy(buffer, "-Err. Introduce la contraseña\n");
+                                            send(new_sd, buffer, sizeof(buffer), 0);
+                                        }
+                                        char *password = strtok(buffer, " ");
+
+                                        if(strcmp(buscarUsuario(usuario), password) == 0)
+                                        {
+                                            strcpy(buffer, "+Ok. Usuario validado\n");
+                                            send(new_sd, buffer, sizeof(buffer), 0);
+                                        }
+                                        else
+                                        {
+                                            strcpy(buffer, "-Err. Error en la validacion\n");
+                                            send(new_sd, buffer, sizeof(buffer), 0);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        strcpy(buffer, "-Err. Usuario incorrecto\n");
+                                        send(new_sd, buffer, sizeof(buffer), 0);
+                                    }
+                                }
+
+                                // else if(strcmp(buffer,"PASSWORD\n") == 0){
+                                    
+                                // }
+
+                                // else if(strcmp(buffer,"INICIAR-PARTIDA\n") == 0){
+                                    
+                                // }
+
+                                // else if(strcmp(buffer,"PEDIR-CARTA\n") == 0){
+                                    
+                                // }
+
+                                // else if(strcmp(buffer,"PLANTARME\n") == 0){
+                                    
+                                // }
+
+                                // else{
+
+                                // }
                                 
-                            // }
-
-                            if(strstr(buffer,"REGISTRO") != NULL){
-                                printf("registro\n");
-                                registro(buffer);
-                            }
-
-                            // else if(strcmp(buffer,"INICIAR-PARTIDA\n") == 0){
-                                
-                            // }
-
-                            // else if(strcmp(buffer,"PEDIR-CARTA\n") == 0){
-                                
-                            // }
-
-                            // else if(strcmp(buffer,"PLANTARME\n") == 0){
-                                
-                            // }
-
-                            // else{
-
-                            // }
-                            
-                                if(strcmp(buffer, "SALIR\n") == 0){
+                                if(strcmp(buffer, "SALIR\n") == 0)
+                                {
                                     salirCliente(i, &readfds, &numClientes, arrayClientes);
                                 }
-                                else{
+                                else
+                                {
                                     sprintf(identificador, "<%d>: %s", i, buffer);
                                     bzero(buffer, sizeof(buffer));
 
@@ -202,11 +236,13 @@ int main(){
                                     printf("%s\n", buffer);
 
                                     for(j=0; j<numClientes; j++)
+                                    {
                                         if(arrayClientes[j] != i)
-                                        send(arrayClientes[j], buffer, sizeof(buffer), 0);
-                                }
-                                                                
-                                
+                                        {
+                                            send(arrayClientes[j], buffer, sizeof(buffer), 0);
+                                        }
+                                    }
+                                }    
                             }
 
                             //Si el cliente introdujo ctrl+c
