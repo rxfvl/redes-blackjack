@@ -1,12 +1,3 @@
 user pass
-paco puerta
-paco papa
-user pass
-user pass
-user pass
-user pass
-user pass
-user pass
-pacopepe pass
-pacopepe hola
-user pass
+paco paco
+pepe paco

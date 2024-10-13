@@ -18,11 +18,11 @@ void registro(char buffer[250]){
             token = strtok(NULL, " ");
             if (token != NULL)
             {
-                // if (buscarUsuario(token) != NULL)
-                // {
-                //     printf("-Err. Usuario ya registrado\n");
-                //     return;
-                // }
+                if (buscarUsuario(token) != NULL)
+                {
+                    printf("-Err. Usuario ya registrado\n");
+                    return;
+                }
                 strcpy(usuario, token);
             }
             token = strtok(NULL, " ");
@@ -70,24 +70,16 @@ char* buscarUsuario(char* usuario)
     }
     else
     {
-        // while(fgets(linea, sizeof(linea), fichero))
-        // {
-        //     linea[strcspn(linea, "\n")] = 0;
-        //     char *aux = strtok(linea, " ");
-        //     if(strcmp(usuario, aux) == 0){
-        //         aux = strtok(NULL, " ");
-        //         fclose(fichero);
-        //         return aux;
-        //     }
-        // }
-
-        while(fscanf(fichero, "%s", usuarioF) != EOF)
+        while (fscanf(fichero, "%s", usuarioF) != EOF)
         {
+            password = malloc(50 * sizeof(char));
             fscanf(fichero, "%s", password);
-            if(strcmp(usuario, usuarioF) == 0){                
+            if (strcmp(usuario, usuarioF) == 0)
+            {
                 fclose(fichero);
                 return password;
             }
+            free(password);
         }
         fclose(fichero);
         return NULL;
