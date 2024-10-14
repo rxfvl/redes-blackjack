@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/rafa/Desktop/redes-blackjack
+CMAKE_SOURCE_DIR = /home/dani/Escritorio/redes-blackjack
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/rafa/Desktop/redes-blackjack/build
+CMAKE_BINARY_DIR = /home/dani/Escritorio/redes-blackjack/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -83,14 +83,14 @@ clean: CMakeFiles/cliente.dir/clean
 CMakeFiles/server.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rafa/Desktop/redes-blackjack/build/CMakeFiles --progress-num=4,5,6 "Built target server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dani/Escritorio/redes-blackjack/build/CMakeFiles --progress-num=4,5,6 "Built target server"
 .PHONY : CMakeFiles/server.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/server.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rafa/Desktop/redes-blackjack/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dani/Escritorio/redes-blackjack/build/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/server.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rafa/Desktop/redes-blackjack/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dani/Escritorio/redes-blackjack/build/CMakeFiles 0
 .PHONY : CMakeFiles/server.dir/rule
 
 # Convenience name for target.
@@ -109,14 +109,14 @@ CMakeFiles/server.dir/clean:
 CMakeFiles/cliente.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cliente.dir/build.make CMakeFiles/cliente.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cliente.dir/build.make CMakeFiles/cliente.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rafa/Desktop/redes-blackjack/build/CMakeFiles --progress-num=1,2,3 "Built target cliente"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dani/Escritorio/redes-blackjack/build/CMakeFiles --progress-num=1,2,3 "Built target cliente"
 .PHONY : CMakeFiles/cliente.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/cliente.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rafa/Desktop/redes-blackjack/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dani/Escritorio/redes-blackjack/build/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/cliente.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rafa/Desktop/redes-blackjack/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dani/Escritorio/redes-blackjack/build/CMakeFiles 0
 .PHONY : CMakeFiles/cliente.dir/rule
 
 # Convenience name for target.
