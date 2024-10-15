@@ -45,9 +45,10 @@ void registro(char buffer[250], int new_sd){
     if (correcto == 1)
     {
         FILE *fichero = fopen("usuarios.txt", "a");
-        if(fichero == NULL){
+        if(fichero == NULL)
+        {
             printf("Error al abrir el fichero\n");
-            return;
+            exit(-1);
         }
         fprintf(fichero, "%s %s", usuario, password);
 
@@ -72,6 +73,7 @@ char* buscarUsuario(char* usuario)
     if (fichero == NULL)
     {
         printf("Fichero usuarios.txt no existe\n");
+        exit(-1);
     }
     else
     {

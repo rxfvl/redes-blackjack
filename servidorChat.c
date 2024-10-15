@@ -51,6 +51,7 @@ int main(){
     int *diamantes = (int *)calloc(13, sizeof(int));
     int *treboles = (int *)calloc(13, sizeof(int));
     int *picas = (int *)calloc(13, sizeof(int));
+    srand(time(NULL));
 
     if(corazones == NULL || diamantes == NULL || treboles == NULL || picas == NULL) 
     {
@@ -221,15 +222,15 @@ int main(){
                                         printf("user2: %s\n", user);
                                         char* password = strtok(buffer, " ");
                                         password = strtok(NULL, " ");
-                                        printf("aaa\n");
+                                        printf("%s\n",user);
                                         char *pass = buscarUsuario(user);
-                                        printf("passwd antigua: %s", pass);
-                                        printf("passwd nueva: %s", password);
-                                        printf("aaa2\n");
-                                        
+                                        printf("passwd antigua: %sb\n", pass);
+                                        printf("passwd nueva: %sb\n", password);
 
+                                        size_t len = strlen(password);
+                                        if (password[len - 1] == '\n') {password[len - 1] = '\0';}                                    
 
-                                        if(buscarUsuario(user) == password)
+                                        if((strcmp(pass, password)) == 0)
                                         {
                                             inicioSesion = 2;
                                             strcpy(buffer, "+OK. Usuario validado\n");
@@ -268,7 +269,7 @@ int main(){
                                                 {
                                                     corazones[numero] = 1;
                                                     disponible = 1;
-                                                    sprintf(carta, "%d de corazones", numero + 1);
+                                                    sprintf(carta, "+Ok, [CORAZONES, %d]", numero + 1);
                                                     strcpy(buffer, carta);
                                                     send(new_sd, buffer, sizeof(buffer), 0);
                                                     free(carta);
@@ -279,7 +280,7 @@ int main(){
                                                 {
                                                     diamantes[numero] = 1;
                                                     disponible = 1;
-                                                    sprintf(carta, "%d de diamantes", numero + 1);
+                                                    sprintf(carta, "+Ok, [DIAMANTES, %d]", numero + 1);
                                                     strcpy(buffer, carta);
                                                     send(new_sd, buffer, sizeof(buffer), 0);
                                                     free(carta);
@@ -290,7 +291,7 @@ int main(){
                                                 {
                                                     treboles[numero] = 1;
                                                     disponible = 1;
-                                                    sprintf(carta, "%d de treboles", numero + 1);
+                                                    sprintf(carta, "+Ok, [TREBOLES, %d]", numero + 1);
                                                     strcpy(buffer, carta);
                                                     send(new_sd, buffer, sizeof(buffer), 0);
                                                     free(carta);
@@ -301,7 +302,7 @@ int main(){
                                                 {
                                                     picas[numero] = 1;
                                                     disponible = 1;
-                                                    sprintf(carta, "%d de picas", numero + 1);
+                                                    sprintf(carta, "+Ok, [PICAS, %d]", numero + 1);
                                                     strcpy(buffer, carta);
                                                     send(new_sd, buffer, sizeof(buffer), 0);
                                                     free(carta);
@@ -312,7 +313,7 @@ int main(){
 
                                 }
 
-                                // else if(strstr(buffer,"PLANTARME") != NULL){
+                                //if(strstr(buffer,"PLANTARME") != NULL){
                                     
                                 // }
                                 
