@@ -44,6 +44,7 @@ void registro(char buffer[250], int new_sd){
  
     if (correcto == 1)
     {
+        printf("fichero\n");
         FILE *fichero = fopen("usuarios.txt", "a");
         if(fichero == NULL)
         {
@@ -68,6 +69,14 @@ char* buscarUsuario(char* usuario)
 
     size_t len = strlen(usuario);
     if (usuario[len - 1] == '\n') {usuario[len - 1] = '\0';}
+
+    FILE* ficheroAux = fopen("usuarios.txt", "a");
+    if (ficheroAux == NULL)
+    {
+        printf("Fichero usuarios.txt no existe\n");
+        exit(-1);
+    }
+    fclose(ficheroAux);
 
     FILE* fichero = fopen("usuarios.txt", "r");
     if (fichero == NULL)

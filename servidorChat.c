@@ -22,6 +22,23 @@
 void manejador(int signum);
 void salirCliente(int socket, fd_set * readfds, int * numClientes, int arrayClientes[]);
 
+struct Cliente
+{
+    char usuario[50];
+    int inicioSesion;
+    int listo;
+};
+
+struct Partida
+{
+    struct sockaddr_in socket1;
+    struct sockaddr_in socket2;
+    char usuario1[50];
+    char usuario2[50];
+    int puntos1;
+    int puntos2;
+};
+
 int main(){
 	/*---------------------------------------------------- 
 		Descriptor del socket y buffer de datos                
@@ -42,6 +59,14 @@ int main(){
 	int recibidos;
    	char identificador[MSG_SIZE];
     int on, ret;
+
+    //Vector de Struct Cliente
+    struct Cliente clientVector[30];
+    int ordenCliente = 0;
+
+    //Vector de Struct Partida
+    struct Partida partidaVector[30];
+    int ordenPartida = 0;
 
     //inicio de sesion
     int inicioSesion = 0;
@@ -233,8 +258,16 @@ int main(){
                                         if((strcmp(pass, password)) == 0)
                                         {
                                             inicioSesion = 2;
+
+                                            struct Cliente cliente;
+                                            strcpy(cliente.usuario, user);
+                                            cliente.inicioSesion = 1;
+                                            clientVector[ordenCliente] = cliente;
+
                                             strcpy(buffer, "+OK. Usuario validado\n");
                                             send(new_sd, buffer, sizeof(buffer), 0);
+
+                                            ordenCliente++;
                                         }
                                         else
                                         {
@@ -245,14 +278,31 @@ int main(){
                                     }
                                 }
 
-                                /*if(strstr(buffer,"INICIAR-PARTIDA") != NULL)
+                                if(strstr(buffer,"INICIAR-PARTIDA") != NULL)
                                 {
                                     if(inicioSesion != 2)
                                     {
                                         strcpy(buffer, "-Err. Necesitas iniciar sesion antes\n");
                                         send(new_sd, buffer, sizeof(buffer), 0); 
-                                    }    
-                                }*/
+                                    }
+                                    else{
+                                        for(int i = 0; i < 30; i++)
+                                        {
+                                            if(strcmp(clientVector[i].usuario, user) == 0)
+                                            {
+                                                clientVector[i].listo = 1;
+                                            }
+                                        }
+
+                                        for(int i = 0; i < 30; i++)
+                                        {
+                                            if(clientVector[i].listo == 1)
+                                            {
+                                                
+                                            }
+                                        }
+                                    }
+                                }
 
                                 if(strstr(buffer,"PEDIR-CARTA") != NULL)
                                 {
