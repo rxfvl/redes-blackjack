@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/dani/Escritorio/redes-blackjack
+CMAKE_SOURCE_DIR = /home/rafa/Desktop/redes-blackjack
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/dani/Escritorio/redes-blackjack/build
+CMAKE_BINARY_DIR = /home/rafa/Desktop/redes-blackjack/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/cliente.dir/depend.make
@@ -72,30 +72,30 @@ include CMakeFiles/cliente.dir/flags.make
 CMakeFiles/cliente.dir/aux.c.o: CMakeFiles/cliente.dir/flags.make
 CMakeFiles/cliente.dir/aux.c.o: ../aux.c
 CMakeFiles/cliente.dir/aux.c.o: CMakeFiles/cliente.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dani/Escritorio/redes-blackjack/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/cliente.dir/aux.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/cliente.dir/aux.c.o -MF CMakeFiles/cliente.dir/aux.c.o.d -o CMakeFiles/cliente.dir/aux.c.o -c /home/dani/Escritorio/redes-blackjack/aux.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rafa/Desktop/redes-blackjack/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/cliente.dir/aux.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/cliente.dir/aux.c.o -MF CMakeFiles/cliente.dir/aux.c.o.d -o CMakeFiles/cliente.dir/aux.c.o -c /home/rafa/Desktop/redes-blackjack/aux.c
 
 CMakeFiles/cliente.dir/aux.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/cliente.dir/aux.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/dani/Escritorio/redes-blackjack/aux.c > CMakeFiles/cliente.dir/aux.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/rafa/Desktop/redes-blackjack/aux.c > CMakeFiles/cliente.dir/aux.c.i
 
 CMakeFiles/cliente.dir/aux.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/cliente.dir/aux.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/dani/Escritorio/redes-blackjack/aux.c -o CMakeFiles/cliente.dir/aux.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/rafa/Desktop/redes-blackjack/aux.c -o CMakeFiles/cliente.dir/aux.c.s
 
 CMakeFiles/cliente.dir/clienteChat.c.o: CMakeFiles/cliente.dir/flags.make
 CMakeFiles/cliente.dir/clienteChat.c.o: ../clienteChat.c
 CMakeFiles/cliente.dir/clienteChat.c.o: CMakeFiles/cliente.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dani/Escritorio/redes-blackjack/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/cliente.dir/clienteChat.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/cliente.dir/clienteChat.c.o -MF CMakeFiles/cliente.dir/clienteChat.c.o.d -o CMakeFiles/cliente.dir/clienteChat.c.o -c /home/dani/Escritorio/redes-blackjack/clienteChat.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rafa/Desktop/redes-blackjack/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/cliente.dir/clienteChat.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/cliente.dir/clienteChat.c.o -MF CMakeFiles/cliente.dir/clienteChat.c.o.d -o CMakeFiles/cliente.dir/clienteChat.c.o -c /home/rafa/Desktop/redes-blackjack/clienteChat.c
 
 CMakeFiles/cliente.dir/clienteChat.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/cliente.dir/clienteChat.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/dani/Escritorio/redes-blackjack/clienteChat.c > CMakeFiles/cliente.dir/clienteChat.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/rafa/Desktop/redes-blackjack/clienteChat.c > CMakeFiles/cliente.dir/clienteChat.c.i
 
 CMakeFiles/cliente.dir/clienteChat.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/cliente.dir/clienteChat.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/dani/Escritorio/redes-blackjack/clienteChat.c -o CMakeFiles/cliente.dir/clienteChat.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/rafa/Desktop/redes-blackjack/clienteChat.c -o CMakeFiles/cliente.dir/clienteChat.c.s
 
 # Object files for target cliente
 cliente_OBJECTS = \
@@ -109,7 +109,7 @@ cliente: CMakeFiles/cliente.dir/aux.c.o
 cliente: CMakeFiles/cliente.dir/clienteChat.c.o
 cliente: CMakeFiles/cliente.dir/build.make
 cliente: CMakeFiles/cliente.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dani/Escritorio/redes-blackjack/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable cliente"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/rafa/Desktop/redes-blackjack/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable cliente"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/cliente.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -121,6 +121,6 @@ CMakeFiles/cliente.dir/clean:
 .PHONY : CMakeFiles/cliente.dir/clean
 
 CMakeFiles/cliente.dir/depend:
-	cd /home/dani/Escritorio/redes-blackjack/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/dani/Escritorio/redes-blackjack /home/dani/Escritorio/redes-blackjack /home/dani/Escritorio/redes-blackjack/build /home/dani/Escritorio/redes-blackjack/build /home/dani/Escritorio/redes-blackjack/build/CMakeFiles/cliente.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/rafa/Desktop/redes-blackjack/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/rafa/Desktop/redes-blackjack /home/rafa/Desktop/redes-blackjack /home/rafa/Desktop/redes-blackjack/build /home/rafa/Desktop/redes-blackjack/build /home/rafa/Desktop/redes-blackjack/build/CMakeFiles/cliente.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/cliente.dir/depend
 

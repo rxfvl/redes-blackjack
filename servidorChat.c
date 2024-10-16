@@ -22,22 +22,17 @@
 void manejador(int signum);
 void salirCliente(int socket, fd_set * readfds, int * numClientes, int arrayClientes[]);
 
-struct Cliente
-{
-    char usuario[50];
-    int inicioSesion;
-    int listo;
-};
 
-struct Partida
-{
-    struct sockaddr_in socket1;
-    struct sockaddr_in socket2;
-    char usuario1[50];
-    char usuario2[50];
-    int puntos1;
-    int puntos2;
-};
+
+// struct Partida
+// {
+//     struct sockaddr_in socket1;
+//     struct sockaddr_in socket2;
+//     char usuario1[50];
+//     char usuario2[50];
+//     int puntos1;
+//     int puntos2;
+// };
 
 int main(){
 	/*---------------------------------------------------- 
@@ -65,7 +60,7 @@ int main(){
     int ordenCliente = 0;
 
     //Vector de Struct Partida
-    struct Partida partidaVector[30];
+    struct Partida partidaVector[10];
     int ordenPartida = 0;
 
     //inicio de sesion
@@ -244,13 +239,9 @@ int main(){
                                     }
                                     else
                                     {
-                                        printf("user2: %s\n", user);
                                         char* password = strtok(buffer, " ");
                                         password = strtok(NULL, " ");
-                                        printf("%s\n",user);
                                         char *pass = buscarUsuario(user);
-                                        printf("passwd antigua: %sb\n", pass);
-                                        printf("passwd nueva: %sb\n", password);
 
                                         size_t len = strlen(password);
                                         if (password[len - 1] == '\n') {password[len - 1] = '\0';}                                    
@@ -261,7 +252,9 @@ int main(){
 
                                             struct Cliente cliente;
                                             strcpy(cliente.usuario, user);
-                                            cliente.inicioSesion = 1;
+                                            cliente.puntuacion = 0;
+                                            cliente.esperando = 0;
+                                            // cliente.inicioSesion = 1;
                                             clientVector[ordenCliente] = cliente;
 
                                             strcpy(buffer, "+OK. Usuario validado\n");
@@ -286,19 +279,18 @@ int main(){
                                         send(new_sd, buffer, sizeof(buffer), 0); 
                                     }
                                     else{
-                                        for(int i = 0; i < 30; i++)
+                                        inicioSesion = 3;
+                                        for (int i = 0; i < 10; i++)
                                         {
-                                            if(strcmp(clientVector[i].usuario, user) == 0)
+                                            if(partidaVector[i].jugador1.usuario == NULL)
                                             {
-                                                clientVector[i].listo = 1;
+                                                partidaVector[i].jugador1 = clientVector[ordenCliente-1];
+                                                partidaVector[i].jugador1.esperando = 1;
                                             }
-                                        }
-
-                                        for(int i = 0; i < 30; i++)
-                                        {
-                                            if(clientVector[i].listo == 1)
+                                            else if(partidaVector[i].jugador2.usuario == NULL)
                                             {
-                                                
+                                                partidaVector[i].jugador2 = clientVector[ordenCliente-1];
+                                                partidaVector[i].jugador2.esperando = 1;
                                             }
                                         }
                                     }
@@ -306,61 +298,68 @@ int main(){
 
                                 if(strstr(buffer,"PEDIR-CARTA") != NULL)
                                 {
-                                    int disponible = 0;
-                                    while(disponible == 0)
+                                    if (inicioSesion != 3)
                                     {
-                                        char* carta = malloc(20 * sizeof(char));
-                                        int palo = rand() % 4;
-                                        int numero = rand() % 13;
-                                        switch(palo)
-                                        {
-                                            case 0:
-                                                if(corazones[numero] == 0)
-                                                {
-                                                    corazones[numero] = 1;
-                                                    disponible = 1;
-                                                    sprintf(carta, "+Ok, [CORAZONES, %d]", numero + 1);
-                                                    strcpy(buffer, carta);
-                                                    send(new_sd, buffer, sizeof(buffer), 0);
-                                                    free(carta);
-                                                }
-                                            break;
-                                            case 1:
-                                                if(diamantes[numero] == 0)
-                                                {
-                                                    diamantes[numero] = 1;
-                                                    disponible = 1;
-                                                    sprintf(carta, "+Ok, [DIAMANTES, %d]", numero + 1);
-                                                    strcpy(buffer, carta);
-                                                    send(new_sd, buffer, sizeof(buffer), 0);
-                                                    free(carta);
-                                                }
-                                            break;
-                                            case 2:
-                                                if(treboles[numero] == 0)
-                                                {
-                                                    treboles[numero] = 1;
-                                                    disponible = 1;
-                                                    sprintf(carta, "+Ok, [TREBOLES, %d]", numero + 1);
-                                                    strcpy(buffer, carta);
-                                                    send(new_sd, buffer, sizeof(buffer), 0);
-                                                    free(carta);
-                                                }
-                                            break;
-                                            case 3:
-                                                if(picas[numero] == 0)
-                                                {
-                                                    picas[numero] = 1;
-                                                    disponible = 1;
-                                                    sprintf(carta, "+Ok, [PICAS, %d]", numero + 1);
-                                                    strcpy(buffer, carta);
-                                                    send(new_sd, buffer, sizeof(buffer), 0);
-                                                    free(carta);
-                                                }
-                                            break;
-                                        }                          
+                                        strcpy(buffer, "-Err. Necesitas iniciar partida antes\n");
+                                        send(new_sd, buffer, sizeof(buffer), 0);
                                     }
-
+                                    else
+                                    {
+                                        int disponible = 0;
+                                        while(disponible == 0)
+                                        {
+                                            char* carta = malloc(20 * sizeof(char));
+                                            int palo = rand() % 4;
+                                            int numero = rand() % 13;
+                                            switch(palo)
+                                            {
+                                                case 0:
+                                                    if(corazones[numero] == 0)
+                                                    {
+                                                        corazones[numero] = 1;
+                                                        disponible = 1;
+                                                        sprintf(carta, "+Ok, [CORAZONES, %d]", numero + 1);
+                                                        strcpy(buffer, carta);
+                                                        send(new_sd, buffer, sizeof(buffer), 0);
+                                                        free(carta);
+                                                    }
+                                                break;
+                                                case 1:
+                                                    if(diamantes[numero] == 0)
+                                                    {
+                                                        diamantes[numero] = 1;
+                                                        disponible = 1;
+                                                        sprintf(carta, "+Ok, [DIAMANTES, %d]", numero + 1);
+                                                        strcpy(buffer, carta);
+                                                        send(new_sd, buffer, sizeof(buffer), 0);
+                                                        free(carta);
+                                                    }
+                                                break;
+                                                case 2:
+                                                    if(treboles[numero] == 0)
+                                                    {
+                                                        treboles[numero] = 1;
+                                                        disponible = 1;
+                                                        sprintf(carta, "+Ok, [TREBOLES, %d]", numero + 1);
+                                                        strcpy(buffer, carta);
+                                                        send(new_sd, buffer, sizeof(buffer), 0);
+                                                        free(carta);
+                                                    }
+                                                break;
+                                                case 3:
+                                                    if(picas[numero] == 0)
+                                                    {
+                                                        picas[numero] = 1;
+                                                        disponible = 1;
+                                                        sprintf(carta, "+Ok, [PICAS, %d]", numero + 1);
+                                                        strcpy(buffer, carta);
+                                                        send(new_sd, buffer, sizeof(buffer), 0);
+                                                        free(carta);
+                                                    }
+                                                break;
+                                            }                          
+                                        }
+                                    }
                                 }
 
                                 //if(strstr(buffer,"PLANTARME") != NULL){

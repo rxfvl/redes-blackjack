@@ -6,7 +6,7 @@
 			[
 				{
 					"build" : ".",
-					"jsonFile" : "directory-.-f5ebdc15457944623624.json",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.0"
@@ -20,7 +20,7 @@
 					]
 				}
 			],
-			"name" : "",
+			"name" : "Debug",
 			"projects" : 
 			[
 				{
@@ -41,14 +41,14 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "cliente::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-cliente-f6c62cde3d19d915a0b7.json",
+					"jsonFile" : "target-cliente-Debug-88e1c50342cb81e9262e.json",
 					"name" : "cliente",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "server::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-server-9a7ae99f2aa1a83abad5.json",
+					"jsonFile" : "target-server-Debug-99105fb62aa86fc184ba.json",
 					"name" : "server",
 					"projectIndex" : 0
 				}
@@ -58,8 +58,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/home/dani/Escritorio/redes-blackjack/build",
-		"source" : "/home/dani/Escritorio/redes-blackjack"
+		"build" : "/home/rafa/Desktop/redes-blackjack/build",
+		"source" : "/home/rafa/Desktop/redes-blackjack"
 	},
 	"version" : 
 	{
