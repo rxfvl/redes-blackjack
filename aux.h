@@ -22,8 +22,10 @@ struct Partida
     struct Cliente jugador1;
     struct Cliente jugador2;
     int turno; // 1 = jugador1, 2 = jugador2
+    int numJugadores;
 };
 
 void registro(char buffer[250], int new_sd);
 char* buscarUsuario(char usuario[250]);
+// int generarCarta(int* corazones, int* diamantes, int* treboles, int *picas, char buffer[250], int new_sd);
 #endif

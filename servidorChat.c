@@ -78,6 +78,11 @@ int main(){
         perror("Error al asignar memoria para los vectores de la baraja");
         exit(1);
     }
+
+    for (int i = 0; i < 10; i++)
+    {
+        partidaVector[i].numJugadores = 0;
+    }
 	/* --------------------------------------------------
 		Se abre el socket 
 	---------------------------------------------------*/
@@ -280,18 +285,42 @@ int main(){
                                     }
                                     else{
                                         inicioSesion = 3;
+                                        int partidaIniciada = 0;
+                                        char user1[50];
+                                        char user2[50];
                                         for (int i = 0; i < 10; i++)
                                         {
-                                            if(partidaVector[i].jugador1.usuario == NULL)
+                                            if(partidaVector[i].numJugadores == 0)
                                             {
                                                 partidaVector[i].jugador1 = clientVector[ordenCliente-1];
                                                 partidaVector[i].jugador1.esperando = 1;
+                                                strcpy(user1, partidaVector[i].jugador1.usuario);
+                                                partidaVector[i].numJugadores++;
+                                                break;
                                             }
-                                            else if(partidaVector[i].jugador2.usuario == NULL)
+                                            else if(partidaVector[i].jugador2.usuario == 1)
                                             {
                                                 partidaVector[i].jugador2 = clientVector[ordenCliente-1];
                                                 partidaVector[i].jugador2.esperando = 1;
+                                                strcpy(user2, partidaVector[i].jugador2.usuario);
+                                                partidaVector[i].numJugadores++;
+                                                break;
                                             }
+
+                                            if(partidaVector[i].jugador1.usuario != NULL && partidaVector[i].jugador2.usuario != NULL)
+                                            {
+                                                partidaIniciada = 1;
+                                                break;
+                                            }
+                                        }
+
+                                        if(partidaIniciada == 1)
+                                        {
+                                            printf("+Ok. Empieza la partida\n");
+                                        }
+                                        else
+                                        {
+                                            printf("+Ok. Esperando otro jugador\n");
                                         }
                                     }
                                 }
@@ -305,6 +334,7 @@ int main(){
                                     }
                                     else
                                     {
+                                        // generarCarta(&corazones, &diamantes, &treboles, &picas, buffer, new_sd);
                                         int disponible = 0;
                                         while(disponible == 0)
                                         {
@@ -357,7 +387,7 @@ int main(){
                                                         free(carta);
                                                     }
                                                 break;
-                                            }                          
+                                            }                      
                                         }
                                     }
                                 }

@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/rafa/Desktop/redes-blackjack/aux.c" "CMakeFiles/cliente.dir/aux.c.o" "gcc" "CMakeFiles/cliente.dir/aux.c.o.d"
-  "/home/rafa/Desktop/redes-blackjack/clienteChat.c" "CMakeFiles/cliente.dir/clienteChat.c.o" "gcc" "CMakeFiles/cliente.dir/clienteChat.c.o.d"
+  "/mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/redes-blackjack-main/aux.c" "CMakeFiles/cliente.dir/aux.c.o" "gcc" "CMakeFiles/cliente.dir/aux.c.o.d"
+  "/mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/redes-blackjack-main/clienteChat.c" "CMakeFiles/cliente.dir/clienteChat.c.o" "gcc" "CMakeFiles/cliente.dir/clienteChat.c.o.d"
   )
 
 # Targets to which this target links.

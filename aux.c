@@ -103,3 +103,61 @@ char* buscarUsuario(char* usuario)
         return NULL;
     }
 }
+
+// int generarCarta(int* corazones, int* diamantes, int* treboles, int *picas, char buffer[250], int new_sd)
+// {
+//     int disponible = 0;
+//     while(disponible == 0)
+//     {
+//         char* carta = malloc(20 * sizeof(char));
+//         int palo = rand() % 4;
+//         int numero = rand() % 13;
+//         switch(palo)
+//         {
+//             case 0:
+//                 if(corazones[numero] == 0)
+//                 {
+//                     corazones[numero] = 1;
+//                     disponible = 1;
+//                     sprintf(carta, "+Ok, [CORAZONES, %d]", numero + 1);
+//                     strcpy(buffer, carta);
+//                     send(new_sd, buffer, sizeof(buffer), 0);
+//                     free(carta);
+//                 }
+//             break;
+//             case 1:
+//                 if(diamantes[numero] == 0)
+//                 {
+//                     diamantes[numero] = 1;
+//                     disponible = 1;
+//                     sprintf(carta, "+Ok, [DIAMANTES, %d]", numero + 1);
+//                     strcpy(buffer, carta);
+//                     send(new_sd, buffer, sizeof(buffer), 0);
+//                     free(carta);
+//                 }
+//             break;
+//             case 2:
+//                 if(treboles[numero] == 0)
+//                 {
+//                     treboles[numero] = 1;
+//                     disponible = 1;
+//                     sprintf(carta, "+Ok, [TREBOLES, %d]", numero + 1);
+//                     strcpy(buffer, carta);
+//                     send(new_sd, buffer, sizeof(buffer), 0);
+//                     free(carta);
+//                 }
+//             break;
+//             case 3:
+//                 if(picas[numero] == 0)
+//                 {
+//                     picas[numero] = 1;
+//                     disponible = 1;
+//                     sprintf(carta, "+Ok, [PICAS, %d]", numero + 1);
+//                     strcpy(buffer, carta);
+//                     send(new_sd, buffer, sizeof(buffer), 0);
+//                     free(carta);
+//                 }
+//             break;
+//         }                      
+//     }
+// }
