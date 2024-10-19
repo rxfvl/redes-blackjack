@@ -1,7 +1,7 @@
 CMakeFiles/cliente.dir/aux.c.o: \
- /mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/redes-blackjack-main/aux.c \
+ /mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/blackjack/redes-blackjack/aux.c \
  /usr/include/stdc-predef.h \
- /mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/redes-blackjack-main/aux.h \
+ /mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/blackjack/redes-blackjack/aux.h \
  /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \

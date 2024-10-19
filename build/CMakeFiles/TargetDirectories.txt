@@ -1,4 +1,4 @@
-/mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/redes-blackjack-main/build/CMakeFiles/server.dir
-/mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/redes-blackjack-main/build/CMakeFiles/cliente.dir
-/mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/redes-blackjack-main/build/CMakeFiles/edit_cache.dir
-/mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/redes-blackjack-main/build/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/blackjack/redes-blackjack/build/CMakeFiles/server.dir
+/mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/blackjack/redes-blackjack/build/CMakeFiles/cliente.dir
+/mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/blackjack/redes-blackjack/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/blackjack/redes-blackjack/build/CMakeFiles/rebuild_cache.dir

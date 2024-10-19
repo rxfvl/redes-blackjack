@@ -36,6 +36,8 @@ void registro(char buffer[250], int new_sd){
                     {
                         strcpy(password, token);
                         correcto = 1;
+                        strcpy(msg, "+OK. Usuario registrado correctamente\n");
+                        send(new_sd, msg, sizeof(msg), 0);  
                     }
                 }
             }
@@ -104,60 +106,67 @@ char* buscarUsuario(char* usuario)
     }
 }
 
-// int generarCarta(int* corazones, int* diamantes, int* treboles, int *picas, char buffer[250], int new_sd)
-// {
-//     int disponible = 0;
-//     while(disponible == 0)
-//     {
-//         char* carta = malloc(20 * sizeof(char));
-//         int palo = rand() % 4;
-//         int numero = rand() % 13;
-//         switch(palo)
-//         {
-//             case 0:
-//                 if(corazones[numero] == 0)
-//                 {
-//                     corazones[numero] = 1;
-//                     disponible = 1;
-//                     sprintf(carta, "+Ok, [CORAZONES, %d]", numero + 1);
-//                     strcpy(buffer, carta);
-//                     send(new_sd, buffer, sizeof(buffer), 0);
-//                     free(carta);
-//                 }
-//             break;
-//             case 1:
-//                 if(diamantes[numero] == 0)
-//                 {
-//                     diamantes[numero] = 1;
-//                     disponible = 1;
-//                     sprintf(carta, "+Ok, [DIAMANTES, %d]", numero + 1);
-//                     strcpy(buffer, carta);
-//                     send(new_sd, buffer, sizeof(buffer), 0);
-//                     free(carta);
-//                 }
-//             break;
-//             case 2:
-//                 if(treboles[numero] == 0)
-//                 {
-//                     treboles[numero] = 1;
-//                     disponible = 1;
-//                     sprintf(carta, "+Ok, [TREBOLES, %d]", numero + 1);
-//                     strcpy(buffer, carta);
-//                     send(new_sd, buffer, sizeof(buffer), 0);
-//                     free(carta);
-//                 }
-//             break;
-//             case 3:
-//                 if(picas[numero] == 0)
-//                 {
-//                     picas[numero] = 1;
-//                     disponible = 1;
-//                     sprintf(carta, "+Ok, [PICAS, %d]", numero + 1);
-//                     strcpy(buffer, carta);
-//                     send(new_sd, buffer, sizeof(buffer), 0);
-//                     free(carta);
-//                 }
-//             break;
-//         }                      
-//     }
-// }
+int generarCarta(int* corazones, int* diamantes, int* treboles, int *picas, int new_sd)
+{
+    int disponible = 0;
+    int puntos = 0;
+    char* carta;
+    int palo;
+    int numero;
+    char msg[250];
+    while(disponible == 0)
+    {
+        carta = malloc(250 * sizeof(char));
+        palo = rand() % 4;
+        numero = rand() % 13;
+        switch(palo)
+        {
+            case 0:
+                if(corazones[numero] == 0)
+                {
+                    corazones[numero] = 1;
+                    disponible = 1;
+                    sprintf(carta, "+OK, [CORAZONES, %d]\n", numero + 1);
+                    strcpy(msg, carta);
+                    send(new_sd, msg, sizeof(msg), 0);
+                    free(carta);
+                }
+            break;
+            case 1:
+                if(diamantes[numero] == 0)
+                {
+                    diamantes[numero] = 1;
+                    disponible = 1;
+                    sprintf(carta, "+OK, [DIAMANTES, %d]\n", numero + 1);
+                    strcpy(msg, carta);
+                    send(new_sd, msg, sizeof(msg), 0);
+                    free(carta);
+                }
+            break;
+            case 2:
+                if(treboles[numero] == 0)
+                {
+                    treboles[numero] = 1;
+                    disponible = 1;
+                    sprintf(carta, "+OK, [TREBOLES, %d]\n", numero + 1);
+                    strcpy(msg, carta);
+                    send(new_sd, msg, sizeof(msg), 0);
+                    free(carta);
+                }
+            break;
+            case 3:
+                if(picas[numero] == 0)
+                {
+                    picas[numero] = 1;
+                    disponible = 1;
+                    sprintf(carta, "+OK, [PICAS, %d]\n", numero + 1);
+                    strcpy(msg, carta);
+                    send(new_sd, msg, sizeof(msg), 0);
+                    free(carta);
+                }
+            break;
+        }                      
+    }
+    puntos = numero + 1;
+    return puntos;
+}

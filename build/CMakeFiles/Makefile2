@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/redes-blackjack-main
+CMAKE_SOURCE_DIR = /mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/blackjack/redes-blackjack
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/redes-blackjack-main/build
+CMAKE_BINARY_DIR = /mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/blackjack/redes-blackjack/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -83,14 +83,14 @@ clean: CMakeFiles/cliente.dir/clean
 CMakeFiles/server.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/redes-blackjack-main/build/CMakeFiles --progress-num=4,5,6 "Built target server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/blackjack/redes-blackjack/build/CMakeFiles --progress-num=4,5,6 "Built target server"
 .PHONY : CMakeFiles/server.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/server.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/redes-blackjack-main/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/blackjack/redes-blackjack/build/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/server.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/redes-blackjack-main/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/blackjack/redes-blackjack/build/CMakeFiles 0
 .PHONY : CMakeFiles/server.dir/rule
 
 # Convenience name for target.
@@ -109,14 +109,14 @@ CMakeFiles/server.dir/clean:
 CMakeFiles/cliente.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cliente.dir/build.make CMakeFiles/cliente.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cliente.dir/build.make CMakeFiles/cliente.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/redes-blackjack-main/build/CMakeFiles --progress-num=1,2,3 "Built target cliente"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/blackjack/redes-blackjack/build/CMakeFiles --progress-num=1,2,3 "Built target cliente"
 .PHONY : CMakeFiles/cliente.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/cliente.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/redes-blackjack-main/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/blackjack/redes-blackjack/build/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/cliente.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/redes-blackjack-main/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/blackjack/redes-blackjack/build/CMakeFiles 0
 .PHONY : CMakeFiles/cliente.dir/rule
 
 # Convenience name for target.

@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/redes-blackjack-main
+# Install script for directory: /mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/blackjack/redes-blackjack
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/redes-blackjack-main/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/mnt/c/Users/TESTER/Desktop/Universidad/3º/Redes/PRÁCTICAS/blackjack/redes-blackjack/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
