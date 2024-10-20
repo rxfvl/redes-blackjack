@@ -20,7 +20,7 @@
  */
 
 void manejador(int signum);
-void salirCliente(int socket, fd_set * readfds, int * numClientes, int arrayClientes[]);
+void salirCliente(int socket, fd_set * readfds, int * numClientes, int arrayClientes[], struct Partida* partidaVector, int ordenPartida, struct Cliente* clientVector, int ordenCliente, int *inicioSesion);
 
 
 
@@ -49,6 +49,8 @@ int main(){
     struct Cliente clientVector[30];
     int ordenCliente = 0;
 
+    int ordenInicio = 0;
+
     for(int i = 0; i < 30; i++)
     {
         clientVector[i].puntuacion = 0;
@@ -67,6 +69,8 @@ int main(){
     char user2[50];
 
     int plantados = 0;
+
+    int indice;
     
     //baraja de cartas
     int *corazones = (int *)calloc(13, sizeof(int));
@@ -163,7 +167,7 @@ int main(){
                             else{
                                 if(numClientes < MAX_CLIENTS){
                                     clientVector[numClientes].sd = new_sd;
-                                    // arrayClientes[numClientes] = new_sd;
+                                    arrayClientes[numClientes] = new_sd;
                                     numClientes++;
                                     FD_SET(new_sd, &readfds);
                                 
@@ -174,7 +178,7 @@ int main(){
                                     for(j=0; j<(numClientes-1);j++){
                                         bzero(buffer,sizeof(buffer));
                                         sprintf(buffer, "Nuevo Cliente conectado en <%d>", new_sd);
-                                        send(arrayClientes[j], buffer, sizeof(buffer), 0);
+                                        // send(arrayClientes[j], buffer, sizeof(buffer), 0);
                                     }
                                 }
                                 else{
@@ -218,11 +222,10 @@ int main(){
                                 {
                                     // int indice = buscarCliente(clientVector, new_sd);
                                     // int sd = clientVector[indice].sd;
-                                    printf("registro\n");
                                     registro(buffer, i);
                                 }
 
-                                if(strstr(buffer,"USUARIO") != NULL)
+                                else if(strstr(buffer,"USUARIO") != NULL)
                                 {
                                     char* usuario = strtok(buffer, " ");
                                     usuario = strtok(NULL, " ");
@@ -231,7 +234,6 @@ int main(){
                                     {
                                         char* contraseña = buscarUsuario(usuario);
                                         strcpy(user, usuario);
-                                        printf("user: %s\n", user);
                                         
                                         if(contraseña != NULL)
                                         {  
@@ -247,7 +249,7 @@ int main(){
                                     }
                                 }
 
-                                if(strstr(buffer,"PASSWORD") != NULL)
+                                else if(strstr(buffer,"PASSWORD") != NULL)
                                 {
                                     if(inicioSesion == 0)
                                     {
@@ -288,15 +290,15 @@ int main(){
                                     }
                                 }
 
-                                if(strstr(buffer,"INICIAR-PARTIDA") != NULL)
+                                else if(strstr(buffer,"INICIAR-PARTIDA") != NULL)
                                 {
-                                    if(inicioSesion != 2)
+                                    if(inicioSesion < 2)
                                     {
                                         strcpy(buffer, "-Err. Necesitas iniciar sesion antes\n");
                                         send(i, buffer, sizeof(buffer), 0); 
                                     }
                                     else{
-                                        inicioSesion = 3;
+                                        inicioSesion++;
                                         int partidaIniciada = 0;
                                         // char user1[50];
                                         // char user2[50];
@@ -304,23 +306,24 @@ int main(){
                                         {
                                             if(partidaVector[j].numJugadores == 0)
                                             {
-                                                partidaVector[j].jugador1 = clientVector[ordenCliente-1];
+                                                ordenInicio = ordenCliente - 2;
+                                                partidaVector[j].jugador1 = clientVector[ordenInicio];
                                                 partidaVector[j].jugador1.esperando = 1;
                                                 partidaVector[j].jugador1.sd = i;
                                                 partidaVector[j].jugador1.pierde = 0;
                                                 // strcpy(user1, partidaVector[j].jugador1.usuario);
                                                 partidaVector[j].numJugadores++;
 
-                                                printf("j = %d\n", j);
-                                                printf("ordenPartida = %d\n", ordenPartida);
                                                 carta1 = generarCarta(corazones, diamantes, treboles, picas, i, partidaVector, ordenPartida+1);
                                                 carta2 = generarCarta(corazones, diamantes, treboles, picas, i, partidaVector, ordenPartida+1);
 
+                                                ordenInicio++;
                                                 break;
                                             }
                                             else if(partidaVector[j].numJugadores == 1)
                                             {
-                                                partidaVector[j].jugador2 = clientVector[ordenCliente-1];
+                                                ordenInicio = ordenCliente - 1;
+                                                partidaVector[j].jugador2 = clientVector[ordenInicio];
                                                 partidaVector[j].jugador2.esperando = 1;
                                                 partidaVector[j].jugador2.sd = i;
                                                 partidaVector[j].jugador1.pierde = 0;
@@ -328,11 +331,10 @@ int main(){
                                                 partidaVector[j].numJugadores++;
                                                 partidaIniciada = 1;
 
-                                                printf("j = %d\n", j);
-                                                printf("ordenPartida = %d\n", ordenPartida);
                                                 carta3 = generarCarta(corazones, diamantes, treboles, picas, i, partidaVector, ordenPartida+1);
                                                 carta4 = generarCarta(corazones, diamantes, treboles, picas, i, partidaVector, ordenPartida+1);
 
+                                                ordenInicio++;
                                                 break;
                                             }
                                         }
@@ -340,19 +342,18 @@ int main(){
                                         if(partidaIniciada == 1)
                                         {
                                             strcpy(buffer, "+OK. Empieza la partida\n");
-                                            send(i, buffer, sizeof(buffer), 0);
+                                            send(partidaVector[ordenPartida+1].jugador1.sd, buffer, sizeof(buffer), 0);
+                                            send(partidaVector[ordenPartida+1].jugador2.sd, buffer, sizeof(buffer), 0);
                                             ordenPartida++;
 
-                                            printf("puntos j1 (inicio) = %d\n", partidaVector[ordenPartida].jugador1.puntuacion);
-                                            printf("puntos j2 (inicio) = %d\n", partidaVector[ordenPartida].jugador2.puntuacion);
+                                            // printf("puntos j1 (inicio) = %d\n", partidaVector[ordenPartida].jugador1.puntuacion);
+                                            // printf("puntos j2 (inicio) = %d\n", partidaVector[ordenPartida].jugador2.puntuacion);
 
                                             sprintf(msg, "TUS-CARTAS: %s %s. OPONENTE: %s\n", carta1, carta2, carta3);
                                             send(partidaVector[ordenPartida].jugador1.sd, msg, sizeof(msg), 0);
-                                            printf("puntos j1 (iniciada) = %d\n", partidaVector[ordenPartida].jugador1.puntuacion);
 
                                             sprintf(msg, "TUS-CARTAS: %s %s. OPONENTE: %s\n", carta3, carta4, carta1);
                                             send(partidaVector[ordenPartida].jugador2.sd, msg, sizeof(msg), 0);
-                                            printf("puntos j2 (iniciada) = %d\n", partidaVector[ordenPartida].jugador2.puntuacion);
 
                                             partidaVector[ordenPartida].turno = 1;
                                         }
@@ -364,9 +365,9 @@ int main(){
                                     }
                                 }
 
-                                if(strstr(buffer,"PEDIR-CARTA") != NULL)
+                                else if(strstr(buffer,"PEDIR-CARTA") != NULL)
                                 {
-                                    if (inicioSesion != 3)
+                                    if (inicioSesion < 4)
                                     {
                                         strcpy(buffer, "-Err. Necesitas iniciar partida antes\n");
                                         send(i, buffer, sizeof(buffer), 0);
@@ -395,7 +396,7 @@ int main(){
                                                 if(partidaVector[ordenPartida].jugador1.puntuacion >= 21){
                                                     partidaVector[ordenPartida].jugador1.pierde = 1;
                                                 }
-                                                printf("puntos j1 = %d\n", partidaVector[ordenPartida].jugador1.puntuacion);
+                                                // printf("puntos j1 = %d\n", partidaVector[ordenPartida].jugador1.puntuacion);
                                             }
                                             if(partidaVector[ordenPartida].jugador2.plantado != 1)
                                             {
@@ -437,7 +438,7 @@ int main(){
                                                 if(partidaVector[ordenPartida].jugador2.puntuacion >= 21){
                                                     partidaVector[ordenPartida].jugador2.pierde = 1;
                                                 }
-                                                printf("puntos j2 = %d\n", partidaVector[ordenPartida].jugador2.puntuacion);
+                                                // printf("puntos j2 = %d\n", partidaVector[ordenPartida].jugador2.puntuacion);
                                             }
                                             if(partidaVector[ordenPartida].jugador1.plantado != 1)
                                             {
@@ -460,85 +461,96 @@ int main(){
                                     }
                                 }
 
-                                if(strstr(buffer,"PLANTARME") != NULL){
-                                    if(partidaVector[ordenPartida].jugador1.sd == i)
+                                else if(strstr(buffer,"PLANTARME") != NULL){
+                                    if(inicioSesion != 4)
                                     {
-                                        partidaVector[ordenPartida].jugador1.plantado = 1;
-                                        partidaVector[ordenPartida].turno = 2;
-                                    }
-                                    else if(partidaVector[ordenPartida].jugador2.sd)
-                                    {
-                                        partidaVector[ordenPartida].jugador2.plantado = 1;
-                                        partidaVector[ordenPartida].turno = 1;
-                                    }
-
-                                    printf("plantados = %d\n", plantados);
-
-                                    if(plantados == 0)
-                                    {
-                                        strcpy(buffer, "+OK. Esperando a que finalice el otro jugador\n");
+                                        strcpy(buffer, "-Err. Esta opción sólo puede usarse dentro de una partida\n");
                                         send(i, buffer, sizeof(buffer), 0);
                                     }
-                                    else if(plantados == 1)
+                                    else
                                     {
-                                        puntos1 = partidaVector[ordenPartida].jugador1.puntuacion;
-                                        puntos2 = partidaVector[ordenPartida].jugador2.puntuacion;
-                                        strcpy(user1, partidaVector[ordenPartida].jugador1.usuario);
-                                        strcpy(user2, partidaVector[ordenPartida].jugador2.usuario);
-
-                                        printf("sd 1 = %d\n", partidaVector[ordenPartida].jugador1.sd);
-                                        printf("sd 2 = %d\n", partidaVector[ordenPartida].jugador2.sd);
-
-                                        printf("puntos 1 = %d\n", puntos1);
-                                        printf("puntos 2 = %d\n", puntos2);
-
-                                        if(puntos1 > 21 && puntos2 > 21)
+                                        if(partidaVector[ordenPartida].jugador1.sd == i)
                                         {
-                                            strcpy(buffer, "+OK. No hay ganadores. Ambos jugadores han excedido los 21 puntos\n");
-                                            send(partidaVector[ordenPartida].jugador1.sd, buffer, sizeof(buffer), 0);
-                                            send(partidaVector[ordenPartida].jugador2.sd, buffer, sizeof(buffer), 0);
+                                            partidaVector[ordenPartida].jugador1.plantado = 1;
+                                            partidaVector[ordenPartida].turno = 2;
+                                        }
+                                        else if(partidaVector[ordenPartida].jugador2.sd)
+                                        {
+                                            partidaVector[ordenPartida].jugador2.plantado = 1;
+                                            partidaVector[ordenPartida].turno = 1;
                                         }
 
-                                        if(puntos1 < 21 && puntos2 <21 && puntos1 == puntos2)
+                                        if(plantados == 0)
                                         {
-                                            sprintf(buffer, "+OK. Jugador <%s> y jugador <%s> habéis empatado la partida\n", user1, user2);
-                                            send(partidaVector[ordenPartida].jugador1.sd, buffer, sizeof(buffer), 0);
-                                            send(partidaVector[ordenPartida].jugador2.sd, buffer, sizeof(buffer), 0);
+                                            strcpy(buffer, "+OK. Esperando a que finalice el otro jugador\n");
+                                            send(i, buffer, sizeof(buffer), 0);
                                         }
+                                        else if(plantados == 1)
+                                        {
+                                            puntos1 = partidaVector[ordenPartida].jugador1.puntuacion;
+                                            puntos2 = partidaVector[ordenPartida].jugador2.puntuacion;
 
-                                        if(puntos1 > puntos2 && puntos1 <= 21)
-                                        {
-                                            sprintf(buffer, "+OK. Jugador <%s> ha ganado la partida\n", user1);
-                                            send(partidaVector[ordenPartida].jugador1.sd, buffer, sizeof(buffer), 0);
-                                            send(partidaVector[ordenPartida].jugador2.sd, buffer, sizeof(buffer), 0);
+                                            strcpy(user1, partidaVector[ordenPartida].jugador1.usuario);
+                                            strcpy(user2, partidaVector[ordenPartida].jugador2.usuario);
+
+                                            // printf("puntos 1 = %d\n", puntos1);
+                                            // printf("puntos 2 = %d\n", puntos2);
+
+                                            // printf("user1 = %s\n", user1);
+                                            // printf("user2 = %s\n", user2);
+
+                                            if(puntos1 > 21 && puntos2 > 21)
+                                            {
+                                                strcpy(buffer, "+OK. No hay ganadores. Ambos jugadores han excedido los 21 puntos\n");
+                                                send(partidaVector[ordenPartida].jugador1.sd, buffer, sizeof(buffer), 0);
+                                                send(partidaVector[ordenPartida].jugador2.sd, buffer, sizeof(buffer), 0);
+                                            }
+
+                                            if(puntos1 < 21 && puntos2 <21 && puntos1 == puntos2)
+                                            {
+                                                sprintf(buffer, "+OK. Jugador <%s> y jugador <%s> habéis empatado la partida\n", user1, user2);
+                                                send(partidaVector[ordenPartida].jugador1.sd, buffer, sizeof(buffer), 0);
+                                                send(partidaVector[ordenPartida].jugador2.sd, buffer, sizeof(buffer), 0);
+                                            }
+
+                                            if(puntos1 > puntos2 && puntos1 <= 21)
+                                            {
+                                                sprintf(buffer, "+OK. Jugador <%s> ha ganado la partida\n", user1);
+                                                send(partidaVector[ordenPartida].jugador1.sd, buffer, sizeof(buffer), 0);
+                                                send(partidaVector[ordenPartida].jugador2.sd, buffer, sizeof(buffer), 0);
+                                            }
+                                            else if(puntos2 > puntos1 && puntos2 <= 21)
+                                            {
+                                                sprintf(buffer, "+OK. Jugador <%s> ha ganado la partida\n", user2);
+                                                send(partidaVector[ordenPartida].jugador1.sd, buffer, sizeof(buffer), 0);
+                                                send(partidaVector[ordenPartida].jugador2.sd, buffer, sizeof(buffer), 0);
+                                            }
+                                            else if(puntos1 < puntos2 && puntos2 > 21)
+                                            {
+                                                sprintf(buffer, "+OK. Jugador <%s> ha ganado la partida\n", user1);
+                                                send(partidaVector[ordenPartida].jugador1.sd, buffer, sizeof(buffer), 0);
+                                                send(partidaVector[ordenPartida].jugador2.sd, buffer, sizeof(buffer), 0);
+                                            }
+                                            else if(puntos2 < puntos1 && puntos1 > 21)
+                                            {
+                                                sprintf(buffer, "+OK. Jugador <%s> ha ganado la partida\n", user2);
+                                                send(partidaVector[ordenPartida].jugador1.sd, buffer, sizeof(buffer), 0);
+                                                send(partidaVector[ordenPartida].jugador2.sd, buffer, sizeof(buffer), 0);
+                                            }
+
+                                            partidaVector[ordenPartida].jugador1.esperando = 0;
+                                            partidaVector[ordenPartida].jugador2.esperando = 0;
+                                            inicioSesion = 0;
                                         }
-                                        else if(puntos2 > puntos1 && puntos2 <= 21)
-                                        {
-                                            sprintf(buffer, "+OK. Jugador <%s> ha ganado la partida\n", user2);
-                                            send(partidaVector[ordenPartida].jugador1.sd, buffer, sizeof(buffer), 0);
-                                            send(partidaVector[ordenPartida].jugador2.sd, buffer, sizeof(buffer), 0);
-                                        }
-                                        else if(puntos1 < puntos2 && puntos2 > 21)
-                                        {
-                                            sprintf(buffer, "+OK. Jugador <%s> ha ganado la partida\n", user1);
-                                            send(partidaVector[ordenPartida].jugador1.sd, buffer, sizeof(buffer), 0);
-                                            send(partidaVector[ordenPartida].jugador2.sd, buffer, sizeof(buffer), 0);
-                                        }
-                                        else if(puntos2 < puntos1 && puntos1 > 21)
-                                        {
-                                            sprintf(buffer, "+OK. Jugador <%s> ha ganado la partida\n", user2);
-                                            send(partidaVector[ordenPartida].jugador1.sd, buffer, sizeof(buffer), 0);
-                                            send(partidaVector[ordenPartida].jugador2.sd, buffer, sizeof(buffer), 0);
-                                        }
+                                        plantados++;
                                     }
-                                    plantados++;
-                                    printf("plantados = %d\n", plantados);
                                 }
                                 
-                                if(strcmp(buffer, "SALIR\n") == 0)
+                                else if(strcmp(buffer, "SALIR\n") == 0)
                                 {
-                                    salirCliente(i, &readfds, &numClientes, arrayClientes);
+                                    salirCliente(i, &readfds, &numClientes, arrayClientes, partidaVector, ordenPartida, clientVector, ordenCliente, &inicioSesion);
                                 }
+
                                 else
                                 {
                                     sprintf(identificador, "<%d>: %s", i, buffer);
@@ -552,9 +564,12 @@ int main(){
                                     {
                                         if(arrayClientes[j] != i)
                                         {
-                                            send(arrayClientes[j], buffer, sizeof(buffer), 0);
+                                            // send(arrayClientes[j], buffer, sizeof(buffer), 0);
                                         }
                                     }
+
+                                    strcpy(buffer, "-Err. Opción no reconocida\n");
+                                    send(i, buffer, sizeof(buffer), 0);
                                 }    
                             }
 
@@ -562,7 +577,7 @@ int main(){
                             if(recibidos== 0){
                                 printf("El socket %d, ha introducido ctrl+c\n", i);
                                 //Eliminar ese socket
-                                salirCliente(i, &readfds, &numClientes, arrayClientes);
+                                salirCliente(i, &readfds, &numClientes, arrayClientes, partidaVector, ordenPartida, clientVector, ordenCliente, &inicioSesion);
                             }
                         }
                     }
@@ -575,7 +590,7 @@ int main(){
 	
 }
 
-void salirCliente(int socket, fd_set * readfds, int * numClientes, int arrayClientes[]){
+void salirCliente(int socket, fd_set * readfds, int * numClientes, int arrayClientes[], struct Partida* partidaVector, int ordenPartida, struct Cliente* clientVector, int ordenCliente, int *inicioSesion){
   
     char buffer[250];
     int j;
@@ -592,13 +607,37 @@ void salirCliente(int socket, fd_set * readfds, int * numClientes, int arrayClie
         (arrayClientes[j] = arrayClientes[j+1]);
     
     (*numClientes)--;
+
+    clientVector[ordenCliente].esperando = 0;
+
+    if(socket == partidaVector[ordenPartida].jugador1.sd)
+    {
+        if(partidaVector[ordenPartida].jugador1.esperando == 1)
+        {
+            strcpy(buffer, "+OK. Tu oponente ha terminado la partida\n");
+            send(partidaVector[ordenPartida].jugador2.sd, buffer, sizeof(buffer), 0);
+        }
+        partidaVector[ordenPartida].jugador1.esperando = 0;
+        *inicioSesion = 2;
+    }
+
+    if(socket == partidaVector[ordenPartida].jugador2.sd)
+    {
+        if(partidaVector[ordenPartida].jugador2.esperando == 1)
+        {
+            strcpy(buffer, "+OK. Tu oponente ha terminado la partida\n");
+            send(partidaVector[ordenPartida].jugador1.sd, buffer, sizeof(buffer), 0);
+        }
+        partidaVector[ordenPartida].jugador2.esperando = 0;
+        *inicioSesion = 2;
+    }
     
     bzero(buffer,sizeof(buffer));
     sprintf(buffer,"Desconexión del cliente <%d>",socket);
     
-    for(j=0; j<(*numClientes); j++)
-        if(arrayClientes[j] != socket)
-            send(arrayClientes[j],buffer,sizeof(buffer),0);
+    // for(j=0; j<(*numClientes); j++)
+    //     if(arrayClientes[j] != socket)
+    //         send(arrayClientes[j],buffer,sizeof(buffer),0);
 
 
 }
