@@ -16,6 +16,9 @@ struct Cliente
     int puntuacion;
     int esperando; // 0 = esperando, 1 = jugando
     int sd;
+    int posicionTurno;
+    int pierde;
+    int plantado;
 };
 
 struct Partida
@@ -28,5 +31,6 @@ struct Partida
 
 void registro(char buffer[250], int new_sd);
 char* buscarUsuario(char usuario[250]);
-int generarCarta(int* corazones, int* diamantes, int* treboles, int *picas, int new_sd);
+char* generarCarta(int* corazones, int* diamantes, int* treboles, int *picas, int i, struct Partida* partidaVector, int ordenPartida);
+int buscarCliente(struct Cliente *clientVector, int new_sd);
 #endif

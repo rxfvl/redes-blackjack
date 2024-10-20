@@ -106,10 +106,9 @@ char* buscarUsuario(char* usuario)
     }
 }
 
-int generarCarta(int* corazones, int* diamantes, int* treboles, int *picas, int new_sd)
+char* generarCarta(int* corazones, int* diamantes, int* treboles, int *picas, int i, struct Partida* partidaVector, int ordenPartida)
 {
     int disponible = 0;
-    int puntos = 0;
     char* carta;
     int palo;
     int numero;
@@ -126,10 +125,11 @@ int generarCarta(int* corazones, int* diamantes, int* treboles, int *picas, int 
                 {
                     corazones[numero] = 1;
                     disponible = 1;
-                    sprintf(carta, "+OK, [CORAZONES, %d]\n", numero + 1);
+                    sprintf(carta, "[CORAZONES, %d]", numero + 1);
                     strcpy(msg, carta);
-                    send(new_sd, msg, sizeof(msg), 0);
-                    free(carta);
+                    // clientVector[indice].puntuacion += numero;
+                    // send(i, msg, sizeof(msg), 0);
+                    // free(carta);
                 }
             break;
             case 1:
@@ -137,10 +137,11 @@ int generarCarta(int* corazones, int* diamantes, int* treboles, int *picas, int 
                 {
                     diamantes[numero] = 1;
                     disponible = 1;
-                    sprintf(carta, "+OK, [DIAMANTES, %d]\n", numero + 1);
+                    sprintf(carta, "[DIAMANTES, %d]", numero + 1);
                     strcpy(msg, carta);
-                    send(new_sd, msg, sizeof(msg), 0);
-                    free(carta);
+                    // clientVector[indice].puntuacion += numero;
+                    // send(i, msg, sizeof(msg), 0);
+                    // free(carta);
                 }
             break;
             case 2:
@@ -148,10 +149,11 @@ int generarCarta(int* corazones, int* diamantes, int* treboles, int *picas, int 
                 {
                     treboles[numero] = 1;
                     disponible = 1;
-                    sprintf(carta, "+OK, [TREBOLES, %d]\n", numero + 1);
+                    sprintf(carta, "[TREBOLES, %d]", numero + 1);
                     strcpy(msg, carta);
-                    send(new_sd, msg, sizeof(msg), 0);
-                    free(carta);
+                    // clientVector[indice].puntuacion += numero;
+                    // send(i, msg, sizeof(msg), 0);
+                    // free(carta);
                 }
             break;
             case 3:
@@ -159,14 +161,34 @@ int generarCarta(int* corazones, int* diamantes, int* treboles, int *picas, int 
                 {
                     picas[numero] = 1;
                     disponible = 1;
-                    sprintf(carta, "+OK, [PICAS, %d]\n", numero + 1);
+                    sprintf(carta, "[PICAS, %d]", numero + 1);
                     strcpy(msg, carta);
-                    send(new_sd, msg, sizeof(msg), 0);
-                    free(carta);
+                    // clientVector[indice].puntuacion += numero;
+                    // send(i, msg, sizeof(msg), 0);
+                    // free(carta);
                 }
             break;
-        }                      
+        }            
     }
-    puntos = numero + 1;
-    return puntos;
+
+    if(partidaVector[ordenPartida].jugador1.sd == i)
+    {
+        partidaVector[ordenPartida].jugador1.puntuacion += (numero + 1);
+    }
+    else if(partidaVector[ordenPartida].jugador2.sd == i)
+    {
+        partidaVector[ordenPartida].jugador2.puntuacion += (numero + 1);
+    }
+
+    return carta;
+}
+
+int buscarCliente(struct Cliente *clientVector, int new_sd){
+    for(int i = 0; i < 30; i++){
+        if(clientVector[i].sd == new_sd)
+        {
+            return i;
+        }
+    }
+    return -1;
 }
